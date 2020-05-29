@@ -36,15 +36,22 @@ namespace Selenium_Automation_Practice2_Amazon
 			//Full screen browser
 			driver.Manage().Window.Maximize();
 
-			//Web Elements
+			//Web Elements and Operations
 			IWebElement SignIn = driver.FindElement( By.Id( "nav-link-accountList" ) );
-			IWebElement EmailField = driver.FindElement( By.Id( "ap_email" ) );
-			IWebElement ContinueButton = driver.FindElement( By.Id( "continue" ) );
-
-			//Operations
 			SignIn.Click();
+
+			IWebElement EmailField = driver.FindElement( By.Id( "ap_email" ) );
 			EmailField.SendKeys( "foiseoisjfosn@fwfwf.com" );
+
+			IWebElement ContinueButton = driver.FindElement( By.Id( "continue" ) );
 			ContinueButton.Click();
+
+			IWebElement ErrorMessage = driver.FindElement( By.ClassName( "a-alert-heading" ) );
+			string ActualErrorMessageText = ErrorMessage.Text;
+			string ExpectedErrorMessageText = "There was a problem";
+
+			Assert.AreEqual( ActualErrorMessageText, ExpectedErrorMessageText );
+
 			
 		}
 
